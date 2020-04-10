@@ -23,7 +23,7 @@ function getData()
     $accessBdd = new Bdd();
     $bdd = $accessBdd->getBdd();
     try {
-        $request = $bdd->prepare("SELECT * FROM products WHERE product_featured = 1 ORDER BY product_id DESC LIMIT 4");
+        $request = $bdd->prepare("SELECT * FROM products ORDER BY product_id DESC");
         $request->execute();
         $solution = $request->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($solution);
@@ -32,5 +32,3 @@ function getData()
         echo "big error";
     }
 }
-
-// "SELECT * FROM products ORDER BY product_id DESC LIMIT 8"
