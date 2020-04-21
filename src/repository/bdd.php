@@ -18,7 +18,6 @@ class Bdd
 
         try {
             $this->bdd = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbName . ';charset=utf8', $this->user, $this->password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-           // echo "successfully connected";
         } catch (Exception $e) {
             var_dump('Err lors de la tentative de connexion: ' . $e->getMessage());
         }

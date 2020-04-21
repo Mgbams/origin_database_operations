@@ -1,0 +1,33 @@
+<?php
+require(__DIR__ . "./../../repository/bdd.php");
+
+class UserRegistrationModel
+{
+    private $bdd;
+    private $accessBdd;
+  public function __construct()
+  {
+    $this->accessBdd = new Bdd();
+    $this->bdd = $this->accessBdd->getBdd();
+  }
+  
+  public function insertCategory($fname, $lname, $city, $country, $email, $mdp)
+  {
+    try {
+      $request = $this->bdd->prepare("INSERT INTO customers(first_name, last_name, city, country, email, customer_password) VALUES(?, ?, ?, ?, ?, ?)");
+
+      return $request->execute(array(
+        $fname,
+        $lname,
+        $city,
+        $country,
+        $email,
+        $mdp
+        ));
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+  }
+}
+?>
