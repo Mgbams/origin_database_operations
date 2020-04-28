@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 require(__DIR__ . "./../models/upload_img_model.php");
 
