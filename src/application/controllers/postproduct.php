@@ -29,6 +29,7 @@ function postProduct()
   $pStock = $newProduct[0]['productQty'];
   $cId = $newProduct[0]['productCategory'];
   $sId = $newProduct[0]['productSupplier'];
+  $subCategoryId = $newProduct[0]['productSubCategory'];
   $suggestedPrice = $newProduct[0]['costPrice'];
   $unitPrice = $newProduct[0]['unitPrice'];
   $imageId = $newProduct[1]['image_id'];
@@ -64,7 +65,7 @@ function postProduct()
   $newProductModel = new PostProductModel();
     try {
         // Connecting to Products table to insert new products
-        $newProductModel->insertProduct($pNumber, $pname, $pDesc, $pPrice, $pDiscount, $pFeatured, $pSizes,  $pColors, $pStock, $pPromo, $cId, $sId, $suggestedPrice, $pAvailable, $unitPrice, $image_id);
+        $newProductModel->insertProduct($pNumber, $pname, $pDesc, $pPrice, $pDiscount, $pFeatured, $pSizes,  $pColors, $pStock, $pPromo, $cId, $sId, $suggestedPrice, $pAvailable, $unitPrice, $image_id, $subCategoryId);
         echo "Successfully Inserted";
     } catch (Exception $e) {
         var_dump("Erreur " . $e->getMessage());
