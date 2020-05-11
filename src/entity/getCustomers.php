@@ -1,14 +1,26 @@
 <?php
-require(__DIR__ . "./../repository/bdd.php");
+// require(__DIR__ . "./../repository/bdd.php");
+// header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
+
+require(__DIR__ . "./../application/models/customers_model.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+header("Access-Control-Max-Age: 3600");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
 
     case 'GET': // read data
-        getData();
+        getCustomers();
+        break;
+
+    case 'DELETE': // read data
+        deleteCustomer();
         break;
 
     default:
@@ -16,19 +28,19 @@ switch ($method) {
 }
 
 
-// CRUD OPERATIONS
-
-function getData()
+function getCustomers()
 {
-    $accessBdd = new Bdd();
-    $bdd = $accessBdd->getBdd();
-    try {
-        $request = $bdd->prepare("SELECT * FROM customers");
-        $request->execute();
-        $solution = $request->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($solution);
-    } catch (Exception $e) {
-        // var_dump("Erreur " . $e->getMessage());
-        echo "big error";
-    }
+    $accessBdd =  new CustomersModel();
+    $accessBdd->getCustomers();
 }
+
+function deleteCustomer()
+{
+    $id = $_GET['id'];
+    $customerId = (int)$id;
+
+    $accessBdd =  new CustomersModel();
+    $accessBdd->delCustomer($customerId);
+}
+
+?>

@@ -25,5 +25,29 @@ class SubCategoryModel
         echo "big error";
     }
   }
+
+    
+  public function updateSubCategory($nom, $desc, $id)
+  {
+    try {
+      $request = $this->bdd->prepare("UPDATE subcategory
+      SET subcategory_name = ?, subcategory_description = ?
+      WHERE subcategory_id = ?");
+
+      $request->execute(array(
+            $nom,
+            $desc,
+            $id
+        ));
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+  }
 }
+
+
 ?>
+
+
+

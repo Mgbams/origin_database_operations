@@ -25,5 +25,23 @@ class CategoryModel
         echo "big error";
     }
   }
+
+  public function updateCategory($nom, $desc, $id)
+  {
+    try {
+      $request = $this->bdd->prepare("UPDATE category
+      SET category_name = ?, category_description = ?
+      WHERE category_id = ?");
+
+      $request->execute(array(
+            $nom,
+            $desc,
+            $id
+        ));
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+  }
 }
 ?>
