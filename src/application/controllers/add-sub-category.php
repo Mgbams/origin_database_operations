@@ -12,8 +12,8 @@ insertData();
 function insertData()
 {
   $postCategory = json_decode(file_get_contents('php://input'), true);
-  $name = $postCategory['categoryName'];
-  $description = $postCategory['categoryDescription'];
+  $name = $postCategory['subcategoryName'];
+  $description = $postCategory['subcategoryDescription'];
     $categoryModel = new SubCategoryModel();
     try {
         $categoryModel->insertSubCategory($name, $description);
