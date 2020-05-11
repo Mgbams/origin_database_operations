@@ -7,8 +7,6 @@ header('Access-Control-Allow-Headers: Accept,Accept-Language,Content-Language,Co
 
 insertData();
 
-// CRUD OPERATIONS
-
 function insertData()
 {
   $postCategory = json_decode(file_get_contents('php://input'), true);

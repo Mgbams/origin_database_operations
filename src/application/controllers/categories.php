@@ -7,7 +7,6 @@ header('Access-Control-Allow-Headers: Accept,Accept-Language,Content-Language,Co
 
 getData();
 
-// CRUD OPERATIONS
 
 function getData()
 {

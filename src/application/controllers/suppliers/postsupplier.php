@@ -7,14 +7,6 @@ header('Access-Control-Allow-Headers: Accept,Accept-Language,Content-Language,Co
 
 postSupplier();
 
-$postSupplier = json_decode(file_get_contents('php://input'), true);
-
-echo "-------------------";
-
-var_dump($postSupplier);
-
-// CRUD OPERATIONS
-
 function postSupplier()
 {
   $postSupplier = json_decode(file_get_contents('php://input'), true);

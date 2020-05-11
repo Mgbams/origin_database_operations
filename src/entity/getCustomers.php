@@ -1,8 +1,4 @@
 <?php
-// require(__DIR__ . "./../repository/bdd.php");
-// header("Access-Control-Allow-Origin: *");
-// header("Content-Type: application/json; charset=UTF-8");
-
 require(__DIR__ . "./../application/models/customers_model.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");

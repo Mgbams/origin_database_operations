@@ -15,15 +15,11 @@ switch ($method) {
         print('{"result": "unsupported request"}');
 }
 
-
-// CRUD OPERATIONS
-
 function getLastInsertedImages()
 {
     $accessBdd = new Bdd();
     $bdd = $accessBdd->getBdd();
     try {
-        // $lastInsertId = $bdd->lastInsertId();
         $request = $bdd->prepare("SELECT * FROM product_images ORDER BY image_id DESC LIMIT 1");
         $request->execute();
         $solution = $request->fetchAll(PDO::FETCH_ASSOC);

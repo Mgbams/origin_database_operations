@@ -1,7 +1,4 @@
 <?php
-// require(__DIR__ . "./../../../repository/bdd.php");
-// header("Access-Control-Allow-Origin: *");
-// header("Content-Type: application/json; charset=UTF-8");
 require(__DIR__ . "./../../models/suppliers_model.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -33,20 +30,8 @@ switch ($method) {
 
 function getData()
 {
-    // $accessBdd = new Bdd();
     $accessBdd =  new SuppliersModel();
-    //$bdd = $accessBdd->getBdd();
     $accessBdd->getSuppliers();
-    
-   /* try {
-        $request = $bdd->prepare("SELECT * FROM suppliers");
-        $request->execute();
-        $solution = $request->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($solution);
-    } catch (Exception $e) {
-        // var_dump("Erreur " . $e->getMessage());
-        echo "big error";
-    } */
 }
 
 function deleteSupplier()

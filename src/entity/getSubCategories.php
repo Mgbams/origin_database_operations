@@ -16,8 +16,6 @@ switch ($method) {
 }
 
 
-// CRUD OPERATIONS
-
 function getData()
 {
     $accessBdd = new Bdd();
