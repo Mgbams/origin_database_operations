@@ -31,7 +31,8 @@ function postProduct()
   $sId = $newProduct[0]['productSupplier'];
   $subCategoryId = $newProduct[0]['productSubCategory'];
   $suggestedPrice = $newProduct[0]['costPrice'];
-  $unitPrice = $newProduct[0]['unitPrice'];
+  // $unitPrice = $newProduct[0]['unitPrice'];
+  $unitPrice = $newProduct[0]['sellingPrice']; // Same as product price
   $imageId = $newProduct[1]['image_id'];
   $image_id = (int)$imageId;
   if ( $newProduct[0]['productFeatured'] === false) {

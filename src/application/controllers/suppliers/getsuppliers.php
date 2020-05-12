@@ -26,8 +26,6 @@ switch ($method) {
 }
 
 
-// CRUD OPERATIONS
-
 function getData()
 {
     $accessBdd =  new SuppliersModel();
@@ -37,10 +35,10 @@ function getData()
 function deleteSupplier()
 {
     $id = $_GET['id'];
-    $supplierId = (int)$id;
+    $supplier_id = (int)$id;
 
     $accessBdd =  new SuppliersModel();
-    $accessBdd->delSupplier($supplierId);
+    $accessBdd->deleteSupplier($supplier_id);
 }
 
 
@@ -48,24 +46,24 @@ function putSupplier()
 {
   $_POST = json_decode(file_get_contents('php://input'), true);
   var_dump($_POST);
-  $cnom = $_POST['info'][0]['data']['companyName'];
-  $cfname = $_POST['info'][0]['data']['contactFname'];
-  $conlname = $_POST['info'][0]['data']['contactlname'];
-  $customerId = $_POST['info'][0]['data']['customerId'];
-  $contactTitle = $_POST['info'][0]['data']['contactTitle']; 
-  $companyAddr = $_POST['info'][0]['data']['address'];
+  $company_name = $_POST['info'][0]['data']['companyName'];
+  $contact_first_name = $_POST['info'][0]['data']['contactFname'];
+  $contact_last_name = $_POST['info'][0]['data']['contactlname'];
+  $customer_id = $_POST['info'][0]['data']['customerId'];
+  $contact_title = $_POST['info'][0]['data']['contactTitle']; 
+  $company_address = $_POST['info'][0]['data']['address'];
   $city = $_POST['info'][0]['data']['city']; 
   $post = $_POST['info'][0]['data']['postalCode']; 
   $country = $_POST['info'][0]['data']['country']; 
   $phone = $_POST['info'][0]['data']['phone']; 
   $email = $_POST['info'][0]['data']['email'];
-  $suppId = $_POST['info'][0]['id'];  
+  $supp_id = $_POST['info'][0]['id'];  
 
-  $supplierId = (int)$suppId;
+  $supplier_id = (int)$supp_id;
   
-  $updateSupplierModel = new SuppliersModel();
+  $update_supplier_model = new SuppliersModel();
     try {
-        $updateSupplierModel->updateSupplier($cnom, $cfname, $conlname, $contactTitle, $companyAddr, $city, $post, $country, $phone, $email, $customerId , $supplierId);
+        $update_supplier_model->updateSupplier($company_name,  $contact_first_name, $contact_last_name, $contact_title, $company_address, $city, $post, $country, $phone, $email, $customer_id, $supplier_id);
     } catch (Exception $e) {
         var_dump("Erreur " . $e->getMessage());
     }

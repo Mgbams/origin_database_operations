@@ -79,7 +79,7 @@ class SuppliersModel
   }
   }
 
-  public function delSupplier($supplierId)
+  public function deleteSupplier($supplierId)
 {
 
     try {
