@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class PromoModel
 {
@@ -49,9 +49,3 @@ class PromoModel
 
 }
 ?>
-
-SELECT * FROM `error` 
-      LEFT JOIN category ON category.category_id = error.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = error.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = error.subcategory_id
-      WHERE error.product_promo = 1 ORDER BY error.product_id DESC LIMIT 1;

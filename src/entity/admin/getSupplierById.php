@@ -21,7 +21,7 @@ switch ($method) {
 function getData()
 {
     $id = $_GET['id'];
-    $supplierId = (int)$id;
+    $supplierId = (int)$id; // Converting $id to int type using type casting
     $accessBdd = new Bdd();
     $bdd = $accessBdd->getBdd();
     try {

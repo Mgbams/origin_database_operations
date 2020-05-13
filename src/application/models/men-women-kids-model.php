@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class MenWomenKidsModel
 {
@@ -14,10 +14,10 @@ class MenWomenKidsModel
   public function getJeans($categoryName, $subcategoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -35,10 +35,10 @@ class MenWomenKidsModel
   public function getShorts($categoryName, $subcategoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -55,10 +55,10 @@ class MenWomenKidsModel
   public function getShirts($categoryName, $subcategoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -76,10 +76,10 @@ class MenWomenKidsModel
   public function getSneakers($categoryName, $subcategoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -96,10 +96,10 @@ class MenWomenKidsModel
   public function getAccessoires($categoryName, $subcategoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -116,10 +116,10 @@ class MenWomenKidsModel
   public function getAllKids($categoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName
@@ -135,10 +135,10 @@ class MenWomenKidsModel
   public function getAllMen($categoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName
@@ -154,10 +154,10 @@ class MenWomenKidsModel
   public function getAllWomen($categoryName)
   {
     try {
-      $request = $this->bdd->prepare("SELECT * FROM `products` 
-      LEFT JOIN category ON category.category_id = products.category_id
-      LEFT JOIN suppliers ON suppliers.supplier_id = products.supplier_id
-      LEFT JOIN subcategory ON subcategory.subcategory_id = products.subcategory_id
+      $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
+      LEFT JOIN category ON category.category_id = origin_products.category_id
+      LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
+      LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName

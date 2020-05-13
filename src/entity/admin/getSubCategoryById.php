@@ -21,13 +21,13 @@ switch ($method) {
 function getData()
 {
     $id = $_GET['id'];
-    $catId = (int)$id;
+    $subCategoryId = (int)$id;
     $accessBdd = new Bdd();
     $bdd = $accessBdd->getBdd();
     try {
         $request = $bdd->prepare("SELECT * FROM subcategory WHERE subcategory_id = ?");
         $request->execute(array(
-            $catId
+            $subCategoryId
         ));
         $solution = $request->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($solution);

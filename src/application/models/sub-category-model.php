@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class SubCategoryModel
 {
@@ -11,14 +11,14 @@ class SubCategoryModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-  public function insertSubCategory($nom, $desc)
+  public function insertSubCategory($name, $description)
   {
     try {
       $request = $this->bdd->prepare("INSERT INTO subcategory(subcategory_name, subcategory_description) VALUES(?, ?)");
 
       return $request->execute(array(
-            $nom,
-            $desc
+        $name, 
+        $description
         ));
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());
@@ -27,7 +27,7 @@ class SubCategoryModel
   }
 
     
-  public function updateSubCategory($nom, $desc, $id)
+  public function updateSubCategory($name, $description, $subcategoryId)
   {
     try {
       $request = $this->bdd->prepare("UPDATE subcategory
@@ -35,9 +35,9 @@ class SubCategoryModel
       WHERE subcategory_id = ?");
 
       $request->execute(array(
-            $nom,
-            $desc,
-            $id
+        $name, 
+        $description, 
+        $subcategoryId
         ));
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());

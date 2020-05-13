@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class CustomersModel
 {

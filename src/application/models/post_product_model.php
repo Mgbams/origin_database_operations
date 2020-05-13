@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class PostProductModel
 {
@@ -11,28 +11,28 @@ class PostProductModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-  public function insertProduct($pNumber, $pname, $pDesc, $pPrice, $pDiscount, $pFeatured, $pSizes,  $pColors, $pStock, $pPromo, $cId, $sId, $suggestedPrice, $pAvailable, $unitPrice, $imageId, $subCategoryId)
+  public function insertProduct($productNumber, $productName, $productDesc, $productPrice, $productDiscount, $productFeatured, $productSizes,  $productColors, $productStock, $productPromo, $customerId, $supplierId, $suggestedPrice, $productAvailable, $unitPrice, $imageId, $subCategoryId)
   {
     try {
-      $request = $this->bdd->prepare("INSERT INTO error(product_no, product_name, product_description, product_price, product_discount, product_featured, product_sizes, product_colors, units_in_stock, product_promo, category_id, supplier_id, cost_price, available, unit_price, image_id, subcategory_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $request = $this->bdd->prepare("INSERT INTO origin_products(product_no, product_name, product_description, product_price, product_discount, product_featured, product_sizes, product_colors, units_in_stock, product_promo, category_id, supplier_id, cost_price, available, unit_price, image_id, subcategory_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
       return $request->execute(array(
-        $pNumber, 
-        $pname, 
-        $pDesc, 
-        $pPrice, 
-        $pDiscount, 
-        $pFeatured, 
-        $pSizes, 
-        $pColors,
-        $pStock, 
-        $pPromo, 
-        $cId, 
-        $sId, 
+        $productNumber, 
+        $productName, 
+        $productDesc, 
+        $productPrice, 
+        $productDiscount, 
+        $productFeatured, 
+        $productSizes,  
+        $productColors, 
+        $productStock, 
+        $productPromo, 
+        $customerId, 
+        $supplierId, 
         $suggestedPrice, 
-        $pAvailable, 
-        $unitPrice,
-        $imageId,
+        $productAvailable, 
+        $unitPrice, 
+        $imageId, 
         $subCategoryId
         ));
     } catch (Exception $e) {

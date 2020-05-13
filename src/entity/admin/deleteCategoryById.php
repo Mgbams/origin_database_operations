@@ -10,17 +10,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'DELETE': // read data
-        delData();
+        deleteData();
         break;
 
     default:
         print('{"result": "unsupported request"}');
 }
 
-
-// CRUD OPERATIONS
-
-function delData()
+function deleteData()
 {
     $id = $_GET['id'];
     $catId = (int)$id;

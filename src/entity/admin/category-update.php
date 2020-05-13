@@ -6,23 +6,19 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
-$updateCategoryValues = json_decode(file_get_contents('php://input'), true);
-var_dump($updateCategoryValues);
- putCategory();
- echo "not seeing this page at all";
+putCategory();
 
 function putCategory()
 {
   $_POST = json_decode(file_get_contents('php://input'), true);
-  $nom = $_POST['info'][0]['data']['categoryName'];
-  $desc = $_POST['info'][0]['data']['categoryDescription'];
+  $name = $_POST['info'][0]['data']['categoryName'];
+  $description = $_POST['info'][0]['data']['categoryDescription'];
   $id = $_POST['info'][0]['id'];
-  $category_id = (int)$id;
+  $categoryId = (int)$id;
   
-  $updateCategoryModelModel = new CategoryModel();
+  $updateCategoryModel = new CategoryModel();
     try {
-        $updateCategoryModelModel->updateCategory($nom, $desc, $category_id);
+        $updateCategoryModel->updateCategory($name, $description, $categoryId );
     } catch (Exception $e) {
         var_dump("Erreur " . $e->getMessage());
     }

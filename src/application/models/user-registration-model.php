@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class UserRegistrationModel
 {
@@ -11,18 +11,18 @@ class UserRegistrationModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-  public function insertCategory($fname, $lname, $city, $country, $email, $mdp)
+  public function insertCategory($firstName, $lastName, $city, $country, $email, $password)
   {
     try {
       $request = $this->bdd->prepare("INSERT INTO customers(first_name, last_name, city, country, email, customer_password) VALUES(?, ?, ?, ?, ?, ?)");
 
       return $request->execute(array(
-        $fname,
-        $lname,
-        $city,
-        $country,
-        $email,
-        $mdp
+        $firstName, 
+        $lastName, 
+        $city, 
+        $country, 
+        $email, 
+        $password
         ));
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());

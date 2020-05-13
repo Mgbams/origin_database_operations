@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../repository/bdd.php");
+require(__DIR__ . "./../config/bdd.php");
 
 class SuppliersModel
 {
@@ -11,7 +11,7 @@ class SuppliersModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-  public function insertSupplier($cnom, $fname, $lname, $title, $addr, $city, $zip, $country, $phone, $mail, $cId)
+  public function insertSupplier($companyName, $firstName, $lastName, $title, $addr, $city, $zip, $country, $phone, $mail, $customerId)
   {
     try {
       $request = $this->bdd->prepare(
@@ -20,17 +20,17 @@ class SuppliersModel
     );
 
       return $request->execute(array(
-        $cnom, 
-        $fname, 
-        $lname, 
+        $companyName, 
+        $firstName, 
+        $lastName, 
         $title, 
         $addr, 
-        $city,  
+        $city, 
         $zip, 
         $country, 
         $phone, 
         $mail, 
-        $cId
+        $customerId
         ));
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());
@@ -38,7 +38,7 @@ class SuppliersModel
     }
   }
 
-  public function updateSupplier($cnom, $cfname, $conlname, $contitl, $comaddr, $city, $post, $country, $phone, $email, $cusId, $suppId)
+  public function updateSupplier($companyName, $contactFirstName, $contactLastName, $contactTitle, $companyAddress, $city, $post, $country, $phone, $email, $customerId, $supplierId)
   {
     try {
       $request = $this->bdd->prepare("UPDATE suppliers
@@ -47,18 +47,18 @@ class SuppliersModel
       WHERE supplier_id = ?");
 
       $request->execute(array(
-        $cnom, 
-        $cfname, 
-        $conlname, 
-        $contitl, 
-        $comaddr, 
+        $companyName, 
+        $contactFirstName, 
+        $contactLastName, 
+        $contactTitle, 
+        $companyAddress, 
         $city, 
         $post, 
         $country, 
         $phone, 
         $email, 
-        $cusId, 
-        $suppId 
+        $customerId, 
+        $supplierId 
         ));
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());

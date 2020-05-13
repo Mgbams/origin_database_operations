@@ -44,10 +44,10 @@ function getData()
     $bdd = $accessBdd->getBdd();
     try {
         $request = $bdd->prepare("
-            SELECT * FROM `error` 
-            LEFT JOIN suppliers ON error.supplier_id = suppliers.supplier_id
-            LEFT JOIN category ON error.category_id = category.category_id
-            LEFT JOIN product_images ON error.image_id = product_images.image_id");
+            SELECT * FROM `products` 
+            LEFT JOIN suppliers ON products.supplier_id = suppliers.supplier_id
+            LEFT JOIN category ON products.category_id = category.category_id
+            LEFT JOIN product_images ON products.image_id = product_images.image_id");
         $request->execute();
         $solution = $request->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($solution);
