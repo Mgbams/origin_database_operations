@@ -11,8 +11,6 @@ class CustomersModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-
-
   public function getCustomers()
   {
     try {
@@ -27,7 +25,7 @@ class CustomersModel
   }
 
 
-  public function delCustomer($customerId)
+  public function deleteCustomer($customerId)
 {
 
     try {

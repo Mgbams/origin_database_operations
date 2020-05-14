@@ -1,12 +1,31 @@
 <?php 
-require(__DIR__ . "./../../../models/post_product_model.php");
+require(__DIR__ . "./../../../models/product-model.php");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
 header('Access-Control-Allow-Headers: headers,observe,responseType,Accept,Accept-Language, X-Requested-With,Content-Language,Content-Type,Authorization');
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 header('Content-Type: multipart/form-data; charset=utf-8');
 
-postProduct();
+$method = $_SERVER['REQUEST_METHOD'];
+
+switch ($method) {
+
+    case 'GET': // read data
+        getProductById();
+        break;
+    case 'PUT': // read data
+        putProductById();
+        break;
+    case 'DELETE': // read data
+        deleteProductById();
+        break;
+    case 'POST': // read data
+        postProduct();;
+        break;
+
+    default:
+        print('{"result": "unsupported request"}');
+}
 
 function postProduct()
 {
@@ -54,7 +73,7 @@ function postProduct()
   // $sId = $newProduct['reorder_level'];     // it is set to 0 by default during database creation
 
   
-  $newProductModel = new PostProductModel();
+  $newProductModel = new ProductModel();
     try {
         // Connecting to Products table to insert new products
         $newProductModel->insertProduct($productNumber, $productName, $productDescription, $productPrice, $productDiscount, $productFeatured, $productSizes,  $productColors, $productInStock, $productPromo, $customerId, $supplierId, $suggestedPrice, $productAvailable, $unitPrice, $image_id, $subCategoryId);
@@ -64,4 +83,17 @@ function postProduct()
         // echo "big error";
     }
 } 
+
+function getProductById() {
+  echo  'get';
+}
+
+function putProductById() {
+  echo 'put';
+}
+
+function deleteProductById() {
+  echo 'delete';
+}
+
 ?>

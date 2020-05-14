@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../application/models/customers_model.php");
+require(__DIR__ . "./../../../models/customers.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
@@ -36,7 +36,7 @@ function deleteCustomer()
     $customerId = (int)$id;
 
     $accessBdd =  new CustomersModel();
-    $accessBdd->delCustomer($customerId);
+    $accessBdd->deleteCustomer($customerId);
 }
 
 ?>

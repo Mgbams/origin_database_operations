@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../models/men-women-kids.php");
+require(__DIR__ . "./../../models/suppliers.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
@@ -12,7 +12,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
 
     case 'GET': // read data
-        getData();
+        getAllSuppliers();
         break;
 
     default:
@@ -20,10 +20,13 @@ switch ($method) {
 }
 
 
-function getData()
+function getAllSuppliers()
 {
-    $accessBdd =  new MenWomenKidsModel();
-    $accessBdd->getShirts();
+    $accessBdd = new SuppliersModel();
+    try {
+        $accessBdd->getSuppliers();
+    } catch(Exception $e) {
+        echo "big error";
+    }
 }
-
 ?>

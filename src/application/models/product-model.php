@@ -1,7 +1,7 @@
 <?php
 require(__DIR__ . "./../config/bdd.php");
 
-class PostProductModel
+class ProductModel
 {
     private $bdd;
     private $accessBdd;

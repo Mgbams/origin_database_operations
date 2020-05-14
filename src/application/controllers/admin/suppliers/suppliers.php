@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../../models/suppliers_model.php");
+require(__DIR__ . "./../../../models/suppliers.php");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
@@ -12,7 +12,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
 
     case 'GET': // read data
-        getData();
+        getSupplierById();
         break;
     case 'PUT': // read data
         putSupplier();
@@ -20,16 +20,24 @@ switch ($method) {
     case 'DELETE': // read data
         deleteSupplier();
         break;
+    case 'POST': // read data
+        postSupplier();
+        break;
 
     default:
         print('{"result": "unsupported request"}');
 }
 
 
-function getData()
-{
+function getSupplierById() {
+    $id = $_GET['id'];
+    $supplierId = (int)$id; // Converting $id to int type using type casting
     $accessBdd =  new SuppliersModel();
-    $accessBdd->getSuppliers();
+   try {
+    $accessBdd->retrieveSupplierById($supplierId);
+    } catch(Exception $e) {
+        echo 'big error';
+    }
 }
 
 function deleteSupplier()
@@ -68,5 +76,31 @@ function putSupplier()
         var_dump("Erreur " . $e->getMessage());
     }
 } 
+
+function postSupplier()
+{
+  $postSupplier = json_decode(file_get_contents('php://input'), true);
+
+  $cname = $postSupplier['companyName'];
+  $fname = $postSupplier['contactFname'];
+  $lname = $postSupplier['contactlname'];
+  $title = $postSupplier['contactTitle'];
+  $addr = $postSupplier['address'];
+  $city = $postSupplier['city'];
+  $zip = $postSupplier['postalCode'];
+  $country = $postSupplier['country'];
+  $phone = $postSupplier['phone'];
+  $mail = $postSupplier['email'];
+  $cId = $postSupplier['customerId'];
+  
+  $supplierModel = new SuppliersModel();
+    try {
+        $supplierModel->insertSupplier($cname, $fname, $lname, $title, $addr, $city, $zip, $country, $phone, $mail, $cId);
+        echo "Successfully Inserted";
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+}
 
 ?>

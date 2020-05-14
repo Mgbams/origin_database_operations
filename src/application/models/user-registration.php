@@ -11,7 +11,7 @@ class UserRegistrationModel
     $this->bdd = $this->accessBdd->getBdd();
   }
   
-  public function insertCategory($firstName, $lastName, $city, $country, $email, $password)
+  public function insertUserInfos($firstName, $lastName, $city, $country, $email, $password)
   {
     try {
       $request = $this->bdd->prepare("INSERT INTO customers(first_name, last_name, city, country, email, customer_password) VALUES(?, ?, ?, ?, ?, ?)");

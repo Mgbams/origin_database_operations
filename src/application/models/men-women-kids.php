@@ -18,6 +18,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -39,6 +40,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -59,6 +61,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -80,6 +83,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -100,6 +104,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ? AND subcategory.subcategory_name  = ?");
       $request->execute(array(
         $categoryName, 
@@ -120,6 +125,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName
@@ -139,6 +145,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName
@@ -158,6 +165,7 @@ class MenWomenKidsModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE category.category_name = ?");
       $request->execute(array(
         $categoryName

@@ -93,5 +93,20 @@ class SuppliersModel
     }
 }
 
+function retrieveSupplierById($supplierId)
+{
+    try {
+        $request = $this->bdd->prepare("SELECT * FROM suppliers WHERE supplier_id = ?");
+        $request->execute(array(
+            $supplierId
+        ));
+        $solution = $request->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($solution);
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+}
+
 }
 ?>
