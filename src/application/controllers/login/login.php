@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "./../repository/bdd.php");
+require(__DIR__ . "./../../config/bdd.php");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Request-Headers: GET,POST,OPTIONS,DELETE,PUT");
 header('Access-Control-Allow-Headers: headers,observe,responseType,Accept,Accept-Language, X-Requested-With,Content-Language,Content-Type,Authorization');
