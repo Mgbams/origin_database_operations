@@ -22,8 +22,11 @@ switch ($method) {
 
 function getData()
 {
+    $categoryName = 'women';
+    $subcategoryName = 'shirts';
+
     $accessBdd =  new MenWomenKidsModel();
-    $accessBdd->getShirts();
+    $accessBdd->getShirts($categoryName, $subcategoryName);
 }
 
 ?>

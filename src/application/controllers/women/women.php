@@ -22,8 +22,10 @@ switch ($method) {
 
 function getData()
 {
+    $categoryName = 'women';
+    
     $accessBdd =  new MenWomenKidsModel();
-    $accessBdd->getAllWomen();
+    $accessBdd->getAllByCategoryName($categoryName);
 }
 
 ?>
