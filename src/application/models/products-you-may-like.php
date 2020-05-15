@@ -21,7 +21,7 @@ public function getSuggestedProducts($categoryName, $subcategoryName)
         LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
         LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
         WHERE category.category_name = ? AND subcategory.subcategory_name = ?
-        ORDER BY origin_products.product_id DESC LIMIT 8
+        ORDER BY category.category_name DESC LIMIT 8
         ");
         $request->execute(array(
             $categoryName, 
