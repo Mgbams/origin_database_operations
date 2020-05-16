@@ -37,6 +37,7 @@ class PromoModel
       LEFT JOIN category ON category.category_id = origin_products.category_id
       LEFT JOIN suppliers ON suppliers.supplier_id = origin_products.supplier_id
       LEFT JOIN subcategory ON subcategory.subcategory_id = origin_products.subcategory_id
+      LEFT JOIN product_images ON product_images.image_id = origin_products.image_id
       WHERE origin_products.product_promo = 1 ORDER BY origin_products.product_id DESC LIMIT 1");
       $request->execute();
       $solution = $request->fetchAll(PDO::FETCH_ASSOC);
