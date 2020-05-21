@@ -85,15 +85,75 @@ function postProduct()
 } 
 
 function getProductById() {
-  echo  'get';
+  $id = $_GET['id'];
+  $productId = (int)$id;
+  $getProductModel = new ProductModel();
+  try {
+    $getProductModel ->getProductById($productId);
+  } catch(Exception $e) {
+      echo "big error";
+  }
 }
 
 function putProductById() {
-  echo 'put';
+  $_POST = json_decode(file_get_contents('php://input'), true);
+  echo "product update";
+  var_dump($_POST);
+  echo "-------------------";
+  var_dump($_POST['info'][0]['data']['productName']);
+  /* $id = $_POST['info'][0]['id'];
+  $productId = (int)$id;
+  
+  $productNumber = $_POST['info'][0]['data']['productNumber']; 
+  $productName = $_POST['info'][0]['data']['productName']; 
+  $productDesc = $_POST['info'][0]['data']['['productDesc']; 
+  $productPrice = $_POST['info'][0]['data']['sellingPrice']; //selling price
+  $productDiscount = $_POST['info'][0]['data']['productDiscount']; 
+  $productFeatured = $_POST['info'][0]['data']['productFeatured']; 
+  $productSizes = $_POST['info'][0]['data']['sizes'];  
+  $productColors = $_POST['info'][0]['data']['colors']; 
+  $productStock = $_POST['info'][0]['data']['productQty']; 
+  $productPromo = $_POST['info'][0]['data']['promo']; 
+  $categoryId = $_POST['info'][0]['data']['productCategory']; 
+  $supplierId = $_POST['info'][0]['data']['productSupplier']; 
+  $suggestedPrice = $_POST['info'][0]['data']['costPrice']; // cost price of the product
+  $productAvailable = $_POST['info'][0]['data']['available'];
+  $unitPrice = $_POST['info'][0]['data']['sellingPrice']; // selling price
+  $subCategoryId = $_POST['info'][0]['data']['productSubCategory'];
+  
+  $updateProductModel = new ProductModel();
+    try {
+      $updateProductModel->updateProduct($productNumber, 
+      $productName, 
+      $productDesc, 
+      $productPrice, 
+      $productDiscount, 
+      $productFeatured, 
+      $productSizes,  
+      $productColors, 
+      $productStock, 
+      $productPromo, 
+      $categoryId, 
+      $supplierId, 
+      $suggestedPrice, 
+      $productAvailable, 
+      $unitPrice, 
+      $subCategoryId,
+      $productId);
+    } catch (Exception $e) {
+        var_dump("Erreur " . $e->getMessage());
+    } */
 }
 
 function deleteProductById() {
-  echo 'delete';
+  $id = $_GET['id'];
+  $productId = (int)$id;
+  $deleteProductModel = new ProductModel();
+  try {
+    $deleteProductModel->deleteProduct($productId);
+  } catch(Exception $e) {
+      echo "big error";
+  } 
 }
 
 ?>
