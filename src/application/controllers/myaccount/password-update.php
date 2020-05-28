@@ -10,6 +10,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
+    case 'GET': // read data
+        checkPasswordForExistence();
+        break;
     case 'PUT': // read data
         updatePassword();
         break;
@@ -20,9 +23,6 @@ switch ($method) {
 function updatePassword()
 {
   $_POST = json_decode(file_get_contents('php://input'), true);
-  var_dump($_POST);
-  var_dump($_GET['id']);
-  var_dump($_POST['newPassword']);
   $password = $_POST['newPassword'];
   $id = $_GET['id'];
   $customerId = (int)$id;
@@ -35,5 +35,27 @@ function updatePassword()
         var_dump("Erreur " . $e->getMessage());
     }
 } 
+
+function checkPasswordForExistence()
+{
+  $password = $_GET['currentPassword'];
+  $id = $_GET['id'];
+  $customerId = (int)$id;
+  // $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    $accessBdd = new MyAccountModel();
+    try {
+        $solution = $accessBdd->getCustomerPassword($customerId, $password);
+        if (password_verify($password, $solution[0]['customer_password'])) {
+            if ($solution !== false) {
+                return;
+            }
+        } else {
+            echo json_encode("This password does not exist for this user");
+        }
+    } catch(Exception $e) {
+        echo "big error";
+    }
+}
 
 ?>

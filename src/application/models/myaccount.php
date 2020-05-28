@@ -40,5 +40,37 @@ class MyAccountModel
   }
   }
 
+  public function getCustomerEmail($id, $email)
+  {
+    try {
+      $request = $this->bdd->prepare("SELECT * FROM customers WHERE customer_id = ? AND email = ?");
+      $request->execute(array(
+        $id,
+        $email
+      ));
+      $solution = $request->fetchAll(PDO::FETCH_ASSOC);
+      return $solution;
+  } catch (Exception $e) {
+      // var_dump("Erreur " . $e->getMessage());
+      echo "big error";
+  }
+  }
+
+  public function getCustomerPassword($id)
+  {
+    try {
+      $request = $this->bdd->prepare("SELECT * FROM customers WHERE customer_id = ?");
+      $request->execute(array(
+        $id
+      ));
+      $solution = $request->fetchAll(PDO::FETCH_ASSOC);
+     // echo json_encode($solution);
+     return $solution;
+  } catch (Exception $e) {
+      // var_dump("Erreur " . $e->getMessage());
+      echo "big error";
+  }
+  }
+
 }
 ?>

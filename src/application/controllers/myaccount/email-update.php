@@ -10,6 +10,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
+    case 'GET': // read data
+        checkEmailForExistence();
+        break;
     case 'PUT': // read data
         updateEmail();
         break;
@@ -34,5 +37,25 @@ function updateEmail()
         var_dump("Erreur " . $e->getMessage());
     }
 } 
+
+function checkEmailForExistence()
+{
+    $email = $_GET['currentEmail'];
+    $id = $_GET['id'];
+    $customerId = (int)$id;
+
+    $accessBdd = new MyAccountModel();
+    try {
+        $solution = $accessBdd->getCustomerEmail($customerId, $email);
+        if ($solution != false) { 
+            // echo json_encode($solution);
+            return;
+          } else {
+            echo json_encode("This Email does not exist for this user");
+          }
+    } catch(Exception $e) {
+        echo "big error";
+    }
+}
 
 ?>
