@@ -23,9 +23,6 @@ switch ($method) {
 function updateEmail()
 {
   $_POST = json_decode(file_get_contents('php://input'), true);
-  var_dump($_POST);
-  var_dump($_GET['id']);
-  var_dump($_POST['newEmail']);
   $email = $_POST['newEmail'];
   $id = $_GET['id'];
   $customerId = (int)$id;
@@ -48,7 +45,6 @@ function checkEmailForExistence()
     try {
         $solution = $accessBdd->getCustomerEmail($customerId, $email);
         if ($solution != false) { 
-            // echo json_encode($solution);
             return;
           } else {
             echo json_encode("This Email does not exist for this user");
