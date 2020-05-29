@@ -76,9 +76,9 @@ class MyAccountModel
   {
     try {
       $request = $this->bdd->prepare("UPDATE `payment_cards` 
-      SET card_nickname = ? first_name = ? last_name = ? shipping_id = ? payment_address = ? 
-      postal_code = ? country = ? city = ? card_no = ? phone_no = ?
-      expire_month = ? expire_year = ? cvv = ? WHERE customer_id = ?"
+      SET card_nickname = ?, first_name = ?, last_name = ?, shipping_id = ?, payment_address = ?, 
+      postal_code = ?, country = ?, city = ?, card_no = ?, phone_no = ?,
+      expire_month = ?, expire_year = ?, cvv = ? WHERE customer_id = ?"
       );
       $request->execute(array(
         $nickName, 
@@ -106,8 +106,8 @@ class MyAccountModel
   {
     try {
       $request = $this->bdd->prepare("UPDATE `shipping_address` 
-      SET first_name = ? last_name = ? country = ? shipping_address = ? 
-      postal_code = ? city = ? phone_no = ? WHERE customer_id = ?");
+      SET first_name = ?, last_name = ?, country = ?, shipping_address = ?, 
+      postal_code = ?, city = ?, phone_no = ? WHERE customer_id = ?");
       $request->execute(array(
         $firstName, 
         $lastName, 
@@ -138,6 +138,61 @@ class MyAccountModel
       echo "big error";
   }
   }
+
+  public function insertShippingAddress($firstName, $lastName, $country, $shippingAddr, $postalCode, $city, $phoneNo, $customerId)
+  {
+    try {
+      $request = $this->bdd->prepare("INSERT INTO `shipping_address` 
+      (first_name, last_name, country, shipping_address, postal_code, city, phone_no, customer_id) 
+    VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+    );
+
+      return $request->execute(array(
+        $firstName, 
+        $lastName, 
+        $country, 
+        $shippingAddr, 
+        $postalCode, 
+        $city, 
+        $phoneNo, 
+        $customerId
+        ));
+    } catch (Exception $e) {
+        // var_dump("Erreur " . $e->getMessage());
+        echo "big error";
+    }
+  }
+
+  
+  public function insertPaymentsInfos($nickName, $firstName, $lastName, $shippingId, $paymentAddress, $postalCode, $country, $city, $cardNo, $phoneNo, $month, $year, $cvv, $customerId)
+  {
+    try {
+      $request = $this->bdd->prepare("INSERT INTO `payment_cards` 
+      (card_nickname, first_name, last_name, shipping_id, payment_address, postal_code, country, city, card_no, phone_no,
+      expire_month, expire_year, cvv, customer_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      );
+      $request->execute(array(
+        $nickName, 
+        $firstName, 
+        $lastName, 
+        $shippingId, 
+        $paymentAddress, 
+        $postalCode, 
+        $country, 
+        $city, 
+        $cardNo, 
+        $phoneNo, 
+        $month, 
+        $year, 
+        $cvv,
+        $customerId
+      ));
+  } catch (Exception $e) {
+      // var_dump("Erreur " . $e->getMessage());
+      echo "big error";
+  }
+  }
+
 
 }
 ?>
