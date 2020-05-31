@@ -18,6 +18,20 @@ include_once "./../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php";
 include_once "./../../../../vendor/phpmailer/phpmailer/src/Exception.php";
 include_once "./../../../../vendor/phpmailer/phpmailer/src/SMTP.php";
 
+// Managing certificate problems
+
+/* use ParagonIE\Certainty\RemoteFetch;
+
+$fetcher = new RemoteFetch('./../../../../vendor/paragonie/certainty/data');
+$latestCACertBundle = $fetcher->getLatestBundle();
+
+// $remoteFetch = new RemoteFetch('/var/www/my-project/data/certs');
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+curl_setopt($ch, CURLOPT_CAINFO, $latestCACertBundle->getFilePath()); */
+
+
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
 $msg = "";
@@ -32,41 +46,37 @@ try {
     $message = $_POST['data'][0]['info']["message"];
     $phone = $_POST['data'][0]['info']["phone"];
     $created_at = date('Y-m-d H:i:s', time());
-    var_dump($subject);
     var_dump($email);
-    var_dump($message);
-    var_dump($phone);
-
-
+   
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
     $mail->SMTPDebug = 3;                    // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       =  'smtp.gmail.com';                    // Set the SMTP server to send through
-    // $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
     $mail->Username   = 'mgbamsstephen@gmail.com';                     // The company address mail
     $mail->Password   = 'iwuchukwu28';                    // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-   // $mail->SMTPSecure = "tls"; 
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged 
     $mail->Port       = '587';                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom($email);                                         // The customer email
-    $mail->addAddress('mgbamsstephen@gmail.com', 'Joe User');     // Add a recipient
+    $mail->setFrom($email, 'Nasir Yagoub');                                         // The customer email
+    $mail->addAddress('mgbamsstephen@gmail.com', 'Origin');     // Add origin company email here
 
     // Content
     $mail->isHTML();                                  // Set email format to HTML
     $mail->Subject = $subject;
-    $mail->Body = $message;
+    $mail->Body =  $message;
     $mail->Mailer = "smtp";
-
-    // $mail->AltBody = $created_at;
+  
     $mail->CharSet = 'utf-8';
-    // $bodyContent = "<h2>Contato de <strong>" . $name . "</strong></h2><br /><h3>E-mail para resposta: <strong>" . $email . "</strong><h3><br /><br /><h5>" . $msg . "</h5><br /><br />Contato enviado em " . $date;
-    // $mail->From = "my-gmail-email@gmail.com";
-    // $mail->FromName = "Myself";
-    // $mail->AddReplyTo($email, $name);
-   //  $mail->AddAddress("my-receiving@email.com", "PneuCar");
+    $mail->SMTPOptions = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+        )
+    );
 
     $mail->send();
 
@@ -74,9 +84,7 @@ try {
     }
     
 } catch (Exception $e) {
-    // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    // echo json_encode($msg);
-     var_dump("message could not be sent");
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
 ?>
