@@ -10,14 +10,14 @@ $postdata = file_get_contents("php://input");
 $_POST = json_decode(file_get_contents('php://input'), true);
 
 if(isset($postdata) && !empty($postdata)) {
-    $email = $_POST['data'][0]['email'];
-    $password = $_POST['data'][1]['password'];
-
-    $pwd = trim($password);
-    // $hashed_password = password_hash($pwd, PASSWORD_DEFAULT);
-    $email = trim($email);
-
+   
     try {
+        $email = $_POST['data'][0]['email'];
+        $password = $_POST['data'][1]['password'];
+    
+        $pwd = trim($password);
+        // $hashed_password = password_hash($pwd, PASSWORD_DEFAULT);
+        $email = trim($email);
         $accessBdd = new Bdd();
         $bdd = $accessBdd->getBdd();
         $request = $bdd->prepare("SELECT * FROM customers WHERE email = ?");

@@ -19,6 +19,7 @@ include_once "./../../../../vendor/phpmailer/phpmailer/src/PHPMailer.php";
 include_once "./../../../../vendor/phpmailer/phpmailer/src/Exception.php";
 include_once "./../../../../vendor/phpmailer/phpmailer/src/SMTP.php";
 
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
@@ -36,7 +37,7 @@ switch ($method) {
 function sendEmail()
 {
   $_POST = json_decode(file_get_contents('php://input'), true);
-  var_dump($_POST);
+  // var_dump($_POST);
   
   $email = $_POST['personalEmail'];
   $booleanResult = validateEmail($email);
@@ -51,7 +52,8 @@ function validateEmail($data) {
     try {
         $resetLink = $forgotPasswordModel->getEmail($data);
         if ($resetLink != false) {
-            echo json_encode("Successfully found email");
+            // echo json_encode("Successfully found email");
+            // echo json_encode( $resetLink);
             return true;
         } else {
             return false;
@@ -67,34 +69,35 @@ function failedResponse() {
 }
 
 function sendLink($email) {
-    // Am using two tokens for this
-    // generating random byte of 8 bits and converting it to hexadecimal so it can be useable in links
-    $selector = bin2hex(random_bytes(8)); 
-
     // generating a random token of 32 bits
     // note: i converted it to hex inside url as i want to use this raw form declared here elsewhere in my code
 
-    $token = random_bytes(32);
+    $token = random_bytes(8);
 
     // This is the url of my angular page where i will reset the password
-    $url = 'http://localhost:8100/reset-password?selector=' . $selector . '&validator=' . bin2hex($token);
+    $url = 'http://localhost:8100/reset-password?token=' . bin2hex($token);
+    $contactUs = 'http://localhost:8100/contact';   /**  To be updated when i upload my site online */
+    $welcomePage  = 'http://localhost:8100/tabs/tab1'; /**  To be updated when i upload my site online */
 
-    $expires = date("U") + 1800;
+    $site = 'www.origin.local'; /**  To be updated when i upload my site online */
 
+    $expires = date("U") + 1800; // expires in an hours time
+    
+    $date = date('Y-m-d H:i:s'); // This is  added to email body to show current time email was sent
+    
     $accessBdd =  new ForgotPasswordtModel();
-    $tokenAlreadyExist = $accessBdd->getToken($email);
-    if ($tokenAlreadyExist !== false) {
-        $accessBdd->deleteToken($email); // Delete previous existing token for this email Address
-    }
     $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-    $accessBdd->insertToken($email,  $selector, $hashedToken, $expires);
+
+    $accessBdd->updateCustomerToken($hashedToken, $expires, $email);
+    $customerInfoWithToken = $accessBdd->getEmail($email);
+    echo json_encode($customerInfoWithToken);
 
     // Instantiation and passing `true` enables exceptions
     $mail = new PHPMailer(true);
    
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-    $mail->SMTPDebug = 3;                    // Enable verbose debug output
+    $mail->SMTPDebug = 0;                    // Enable verbose debug output
     $mail->isSMTP();                                            // Send using SMTP
     $mail->Host       =  'smtp.gmail.com';                    // Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -110,11 +113,33 @@ function sendLink($email) {
     
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = '<h2>Reset Your Origin Password</h2>';
-    $mail->Body =  "<p>We received a password reset request. The link to reset your password is below.
-                     If you did not make this request you can ignore this message. <br /> 
-                     Here is your password reset link <br />
-                    </p>" . '<a href="' .$url . '">' . $url . '</a>';
+    $mail->Subject = 'Reset Your Origin Password';
+
+     $mail->Body = "<div style='border: 1px solid gray; border-top: 8px solid pink; width: 40vw; margin: auto;'>
+                        <div style='border-bottom: 1px solid gray; width: 40vw;'>
+                            <div style='display: flex; flex-direction: row; justify-content: space-between; padding: 0px 20px; width: 35vw;'>
+                                <div style='width: 8vw;'><p>Origin.com</p></div>
+                                <div style='width: 12vw; margin-left: 35%;'><p>Reset Your Password</p></div>
+                            </div>
+                            <hr style='width: 38vw; margin: 8px auto;'/>
+                        </div>
+                        <div style='width: 100%; padding: 12px 20px;'>
+                            <p>You recently asked to reset your <a href='" . $site. "'>www.origin.local</a> passowrd</p>
+                            <p>To continue the password reset process, please proceed to link below.</p>
+                            <p style='background-color: yellow; width: 15vw; padding: 6px 0px; text-align: center; font-size: 1rem;'><a href='" .  $url . "' style='text-decoration: none;'><strong>RESET PASSWORD</strong></a></p>
+                            <p>This password reset request was made on " . $date . "</p>
+                            <p>For security reasons, the password reset link will expire in an hour or after you <br />
+                            reset your password.</p>
+                            <p><strong>Questions or Comments?</strong></p>
+                            <a href='" . $contactUs . "'>Please Contact Us</a>
+                        </div>
+                    </div>
+                    <div style='width: 40vw; margin: auto;'>
+                        <hr />
+                        <small>This is an automated email. Please do not reply to this email. &copy; origin.com " . date("Y") . "</small> <br />
+                        <small style='text-align: center;'>Powered by <a href='" . $welcomePage . "'>Origin.com</a></small>
+                    </div>
+                    ";
 
     $mail->Mailer = "smtp";
   
@@ -139,9 +164,17 @@ function sendLink($email) {
 function updateForgottenPassword() {
     $_POST = json_decode(file_get_contents('php://input'), true);
     var_dump($_POST);
-    $newPassword = $_POST['newPassword'];
-    // remains to add an email argument into the updatePassword method
 
-    $accessBdd =  new ForgotPasswordtModel();
-    $accessBdd->updatePassword($newPassword);
+    try {
+        $resetToken = $_POST['data'][0]['token'];
+        $password =  $_POST['data'][0]['password']['newPassword']; 
+        $cryptedPassword = password_hash($password, PASSWORD_DEFAULT);
+     
+        $accessBdd =  new ForgotPasswordtModel();
+        $accessBdd->updatePassword($cryptedPassword, $resetToken);
+    } catch (Exception $e) {
+        var_dump("Erreur " . $e->getMessage());
+       // echo "big error";
+    }
+ 
 }
