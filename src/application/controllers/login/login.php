@@ -11,7 +11,7 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 
 if(isset($postdata) && !empty($postdata)) {
     $email = $_POST['data'][0]['email'];
-        $password = $_POST['data'][1]['password'];
+    $password = $_POST['data'][1]['password'];
    
     try {
         $pwd = trim($password);

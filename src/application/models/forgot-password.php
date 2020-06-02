@@ -54,14 +54,14 @@ class ForgotPasswordtModel
   }
   }
 
-  public function updatePassword($newPassword, $resetToken) {
+  public function updatePassword($newPassword, $email) {
     try {
       $request = $this->bdd->prepare("UPDATE `customers` 
-      SET customer_password = ? WHERE password_reset_token = ?"
+      SET customer_password = ? WHERE email = ?"
       );
       $request->execute(array(
         $newPassword,
-        $resetToken
+        $email
       ));
   } catch (Exception $e) {
       var_dump("Erreur " . $e->getMessage());
