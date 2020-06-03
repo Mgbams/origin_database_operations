@@ -22,15 +22,14 @@ switch ($method) {
 
 function getProducts()
 {
-    $categoryName = 'men';
-    $subcategoryName = 'sneakers';
+    $categoryName = 'kids';
     $startPage = $_GET['start_page'];
     $numPerPage = $_GET['num_of_products'];
     $page = (int) $startPage;
     $numPage = (int) $numPerPage;
 
     $accessBdd =  new PaginateMenWomenKidsModel();
-    $accessBdd->PaginateMenSubcategoryProducts($page, $numPage, $categoryName, $subcategoryName);
+    $accessBdd->PaginateMenWomenKidsProducts($page, $numPage, $categoryName);
 }
 
 ?>

@@ -32,5 +32,4 @@ function getProducts()
     $accessBdd->PaginateMenWomenKidsProducts($page, $numPage, $categoryName);
 }
 
-
 ?>

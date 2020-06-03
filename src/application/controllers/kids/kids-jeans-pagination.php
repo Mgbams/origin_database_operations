@@ -6,7 +6,6 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
@@ -22,15 +21,17 @@ switch ($method) {
 
 function getProducts()
 {
-    $categoryName = 'men';
-    $subcategoryName = 'sneakers';
+    $categoryName = 'kids';
+    $subcategoryName = 'jeans';
     $startPage = $_GET['start_page'];
     $numPerPage = $_GET['num_of_products'];
+    
     $page = (int) $startPage;
     $numPage = (int) $numPerPage;
 
     $accessBdd =  new PaginateMenWomenKidsModel();
     $accessBdd->PaginateMenSubcategoryProducts($page, $numPage, $categoryName, $subcategoryName);
 }
+
 
 ?>

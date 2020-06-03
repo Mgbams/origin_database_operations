@@ -33,5 +33,4 @@ function getProducts()
     $accessBdd->PaginateMenSubcategoryProducts($page, $numPage, $categoryName, $subcategoryName);
 }
 
-
 ?>

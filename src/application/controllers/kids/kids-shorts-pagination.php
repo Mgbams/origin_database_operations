@@ -22,8 +22,8 @@ switch ($method) {
 
 function getProducts()
 {
-    $categoryName = 'men';
-    $subcategoryName = 'sneakers';
+    $categoryName = 'kids';
+    $subcategoryName = 'shorts';
     $startPage = $_GET['start_page'];
     $numPerPage = $_GET['num_of_products'];
     $page = (int) $startPage;
