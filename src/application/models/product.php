@@ -116,7 +116,7 @@ class ProductModel
   }
 
   public function deleteProduct($productId)
-{
+ {
     try {
         $request = $this->bdd->prepare("DELETE FROM `origin_products` WHERE product_id = ?");
         $request->execute(array(
@@ -126,10 +126,10 @@ class ProductModel
         // var_dump("Erreur " . $e->getMessage());
         echo "big error";
     }
-}
+ }
 
-public function PaginateProducts($page, $numPage)
-{
+ public function PaginateProducts($page, $numPage)
+ {
     try {
         $request = $this->bdd->prepare("SELECT * FROM `origin_products` 
         LEFT JOIN category ON category.category_id = origin_products.category_id
@@ -143,7 +143,7 @@ public function PaginateProducts($page, $numPage)
     } catch (Exception $e) {
         var_dump("Erreur " . $e->getMessage());
     }
-}
+ }
 
 }
 ?>

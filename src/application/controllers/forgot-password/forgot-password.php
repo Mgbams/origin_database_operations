@@ -199,7 +199,7 @@ function sendPasswordSuccessfullyUpdatedEmail($email) {
     $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged 
     $mail->Port       = '587';                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-    $mail->From =  'origin@thunderbild.com';
+    // $mail->From =  'origin@thunderbild.com';
     $mail->FromName = 'Mgbams Administrator';  // Name of email sender. It is the left name that appears on received mail
     //Recipients
     $mail->addAddress($email);     // Add address of users. it will appear in Reply-To address
@@ -219,7 +219,7 @@ function sendPasswordSuccessfullyUpdatedEmail($email) {
                         <div style='width: 100%; padding: 12px 20px;'>
                             <p style='color: orange;'>Hello ,</p>
                             <p>Your Origin.com password<br />
-                                has been updated on " . $date . ".</p>
+                                has been updated on " . $date . " . </p>
                             <p>If you did not make this changes or <br />
                             you believe an unauthorised person <br />has accessed
                             your account, you <br /> should notify Customer Support as <br />

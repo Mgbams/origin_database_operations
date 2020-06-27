@@ -26,7 +26,7 @@ class CustomersModel
 
 
   public function deleteCustomer($customerId)
-{
+ {
 
     try {
         $request = $this->bdd->prepare("DELETE FROM customers WHERE customer_id = ?");
@@ -36,6 +36,18 @@ class CustomersModel
     } catch (Exception $e) {
         // var_dump("Erreur " . $e->getMessage());
         echo "big error";
+    }
+ }
+
+ public function PaginateCustomers($page, $numPage)
+{
+    try {
+        $request = $this->bdd->prepare("SELECT * FROM `customers` LIMIT $page, $numPage");
+        $request->execute();
+        $solution = $request->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($solution);
+    } catch (Exception $e) {
+        var_dump("Erreur " . $e->getMessage());
     }
 }
 

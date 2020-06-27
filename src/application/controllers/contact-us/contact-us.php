@@ -41,6 +41,8 @@ try {
     $_POST = json_decode(file_get_contents('php://input'), true);
     if(!empty($_POST)) {
     var_dump($_POST);
+
+    $name = $_POST['data'][0]['info']["name"];
     $subject = $_POST['data'][0]['info']["subject"];
     $email = $_POST['data'][0]['info']["email"];
     $message = $_POST['data'][0]['info']["message"];
@@ -60,11 +62,12 @@ try {
     $mail->Port       = '587';                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
     //Recipients
-    $mail->setFrom($email, 'Nasir Yagoub');                                         // The customer email
-    $mail->addAddress('mgbamsstephen@gmail.com', 'Origin');     // Add origin company email here
+    $mail->From =  $email;  
+    $mail->FromName = $name;                                       
+    $mail->addAddress($email);     // user email
 
     // Content
-    $mail->isHTML();                                  // Set email format to HTML
+    $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $subject;
     $mail->Body =  $message;
     $mail->Mailer = "smtp";
